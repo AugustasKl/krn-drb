@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "firebase": "^9.0.2",
     "node-sass": "4.14.1",
+    "persist": "^0.2.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.5",
@@ -15,6 +16,7 @@
     "react-scripts": "^4.0.3",
     "redux": "^4.1.1",
     "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
     "reselect": "^4.0.0",
     "web-vitals": "^1.0.1"
   },
