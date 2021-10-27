@@ -1,15 +1,15 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/firestore";
 import "firebase/compat/auth";
+import collectionComponent from "../pages/collection/collection.component";
 
 const config = {
-  apiKey: "AIzaSyDLuJYCsAImFqEeNumZMlkaXKGXSlH0NkM",
-  authDomain: "karunos-dn.firebaseapp.com",
-  projectId: "karunos-dn",
-  storageBucket: "karunos-dn.appspot.com",
-  messagingSenderId: "956543297887",
-  appId: "1:956543297887:web:c7030454fa5ca8f2f36eea",
-  measurementId: "G-W4R1E9CF3F",
+  apiKey: "AIzaSyBXo7JI7NGJKsYD7pY1C8OKWPESB2_bAmw",
+  authDomain: "lasttry-df740.firebaseapp.com",
+  projectId: "lasttry-df740",
+  storageBucket: "lasttry-df740.appspot.com",
+  messagingSenderId: "328897066997",
+  appId: "1:328897066997:web:0e816b28a0ac556f5852bc"
 };
 
 firebase.initializeApp(config);
@@ -53,6 +53,20 @@ export const createuserProfileDocument = async (userAuth, additionalData) => {
   }
   return userRef;
 };
+
+export const addCollectionAndDocuments = async(collectionKey, objectsToAdd) => {
+  const collectionRef=firestore.collection(collectionKey)
+  console.log(collectionRef)
+
+  const batch =firestore.batch()
+  objectsToAdd.forEach((obj)=>{
+    const newDocRef=collectionRef.doc();
+    batch.set(newDocRef, obj)
+  })
+  return await batch.commit()
+}
+
+
 
 //   const provider = new firebase.auth.GoogleAuthProvider();
 const provider = new firebase.auth.GoogleAuthProvider();
