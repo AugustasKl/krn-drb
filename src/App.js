@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, {useEffect} from "react";
 import HomePage from "./pages/homepage/homepage.component";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ShopPage from "./pages/shop/shop.component";
@@ -10,13 +10,19 @@ import CheckoutPage from "./pages/checkout/checkout.components";
 import { checkUserSession } from "./components/redux/user/user.action";
 import { connect } from "react-redux";
 
-class App extends React.Component {
-  unsubscribeFromAuth = null;
 
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-    checkUserSession();
 
+const App =({ checkUserSession, currentUser })=> {
+// class App extends React.Component {
+//   unsubscribeFromAuth = null;
+
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;
+  //   checkUserSession();
+
+  useEffect(()=>{
+    checkUserSession()
+  },[checkUserSession])
     // const {setCurrentUser}=this.props
     // this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
     //   if(userAuth){
@@ -33,12 +39,12 @@ class App extends React.Component {
     //     setCurrentUser(userAuth);
     //   }
     // });
-  }
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+  
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // }
 
-  render() {
+ 
     return (
       <div>
         <Header />
@@ -49,7 +55,7 @@ class App extends React.Component {
             exact
             path="/signin"
             render={() =>
-              this.props.currentUser ? (
+            currentUser ? (
                 <Redirect to="/" />
               ) : (
                 <SignInAndSignUpPage />
@@ -61,7 +67,7 @@ class App extends React.Component {
       </div>
     );
   }
-}
+
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
